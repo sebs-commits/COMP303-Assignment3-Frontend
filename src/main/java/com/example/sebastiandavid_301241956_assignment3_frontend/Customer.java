@@ -1,12 +1,11 @@
 package com.example.sebastiandavid_301241956_assignment3_frontend;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
@@ -17,5 +16,7 @@ public class Customer {
     private String email;
     private LocalDate dob;
     private String address;
-    private String phoneNumber;
+    private String phone;
+
+    private Boolean admin;
 }

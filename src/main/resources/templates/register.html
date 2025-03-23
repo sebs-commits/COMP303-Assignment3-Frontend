@@ -62,10 +62,18 @@
 
                     <!-- Phone Number -->
                     <div class="col-md-6">
-                        <label for="phoneNumber" class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" id="phoneNumber" th:field="*{phoneNumber}"
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" th:field="*{phone}"
                                placeholder="(123) 456-7890">
-                        <div class="text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
+                        <div class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+                    </div>
+
+                    <!-- Role -->
+                    <div class="col-md-6">
+                        <div class="form-check mt-4">
+                            <input type="checkbox" class="form-check-input" id="admin" th:field="*{admin}">
+                            <label class="form-check-label" for="admin">Is Manager?</label>
+                        </div>
                     </div>
 
                     <!-- Submit Button -->
@@ -80,6 +88,8 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 
 </body>
