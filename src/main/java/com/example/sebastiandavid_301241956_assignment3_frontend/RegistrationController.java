@@ -20,7 +20,7 @@ public class RegistrationController {
     @Autowired
     RestTemplate restTemplate;
 
-    private final String baseUrl = "http://localhost:8080/";
+    private final String baseUrl = "http://localhost:8080/api";
 
     @RequestMapping("/register-page")
     public String registerPage(Model model) {
@@ -42,7 +42,7 @@ public class RegistrationController {
         try {
             HttpEntity<Customer> request = new HttpEntity<>(customer);
             ResponseEntity<Customer> response = restTemplate.postForEntity(
-                    baseUrl + "/api/register",
+                    baseUrl + "/register",
                     request,
                     Customer.class
             );

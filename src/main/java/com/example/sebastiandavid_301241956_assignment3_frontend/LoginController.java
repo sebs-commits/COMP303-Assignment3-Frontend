@@ -23,7 +23,7 @@ public class LoginController {
     @Autowired
     RestTemplate restTemplate;
 
-    private final String baseUrl = "http://localhost:8080/";
+    private final String baseUrl = "http://localhost:8080/api";
 
     @RequestMapping("/login-page")
     public String loginPage(Model model) {
@@ -38,7 +38,7 @@ public class LoginController {
         try {
             HttpEntity<Customer> request = new HttpEntity<>(customer);
             ResponseEntity<Map> response = restTemplate.postForEntity(
-                    baseUrl + "/api/login",
+                    baseUrl + "/login",
                     request,
                     Map.class
             );
@@ -47,8 +47,7 @@ public class LoginController {
             if (response.getStatusCode() == HttpStatus.OK) {
                 session.setAttribute("customerId", customer.getCustomerId());
                 session.setAttribute("username", customer.getUsername());
-                mv.setViewName("dashboard");
-                mv.addObject("message", "Login successful!");
+                mv.setViewName("redirect:/dashboard");
             } else {
                 mv.setViewName("login");
                 mv.addObject("error", "Login failed!");
