@@ -99,4 +99,59 @@ public class ManagerController {
             return getCustomerDetails(customerId, model);
         }
     }
+    @PostMapping("/customer/{id}/update-details")
+    public String updateCustomerDetails(
+            @PathVariable int id,
+            @RequestParam(required = false) String username,
+            @RequestParam(required = false) String customerName,
+            @RequestParam(required = false) String password,
+            @RequestParam(required = false) String address,
+            @RequestParam(required = false) String postalCode,
+            @RequestParam(required = false) String city,
+            Model model) {
+        try {
+            Map<String, Object> customerDetails = new HashMap<>();
+
+            if (username != null && !username.trim().isEmpty()) {
+                customerDetails.put("username", username);
+            }
+            if (customerName != null && !customerName.trim().isEmpty()) {
+                customerDetails.put("customerName", customerName);
+            }
+            if (password != null && !password.trim().isEmpty()) {
+                customerDetails.put("password", password);
+            }
+            if (address != null && !address.trim().isEmpty()) {
+                customerDetails.put("address", address);
+            }
+            if (postalCode != null && !postalCode.trim().isEmpty()) {
+                customerDetails.put("postalCode", postalCode);
+            }
+            if (city != null && !city.trim().isEmpty()) {
+                customerDetails.put("city", city);
+            }
+
+            // Make PUT request to backend
+            HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(customerDetails);
+            ResponseEntity<Map> response = restTemplate.exchange(
+                    baseUrl + "/customers/" + id,
+                    HttpMethod.PUT,
+                    requestEntity,
+                    Map.class
+            );
+
+            if (response.getStatusCode() == HttpStatus.OK) {
+                model.addAttribute("customerUpdateSuccess", "Updated!");
+            } else {
+                model.addAttribute("customerUpdateError", "Failed to update information");
+            }
+        } catch (Exception e) {
+            model.addAttribute("customerUpdateError", "Error updating customer details: " + e.getMessage());
+        }
+
+        // Return to the same page
+        return getCustomerDetails(id, model);
+    }
+
+
 }
