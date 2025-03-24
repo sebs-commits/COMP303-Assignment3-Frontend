@@ -87,6 +87,12 @@ public class ManagerController {
                     Map.class
             );
 
+            if (response.getStatusCode() == HttpStatus.OK) {
+                model.addAttribute("success", "Account updated");
+            } else {
+                model.addAttribute("error", "Failed to update");
+            }
+
             return getCustomerDetails(customerId, model);
         } catch (Exception e) {
             model.addAttribute("error", "Could not update the account " + e.getMessage());

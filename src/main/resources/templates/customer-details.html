@@ -10,6 +10,7 @@
         <h1>Customer Accounts</h1>
 
         <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
 
         <div th:if="${accounts != null and !accounts.isEmpty()}">
             <div class="border border-primary-subtle">
