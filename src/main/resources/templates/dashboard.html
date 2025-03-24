@@ -10,6 +10,8 @@
     <div class="container mt-5">
         <h2>List of Customers</h2>
 
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
         <div th:if="${customers != null and !customers.isEmpty()}">
             <table class="table table-striped">
                 <thead>
@@ -31,11 +33,13 @@
                     <td th:text="${customer['phone']}"></td>
                     <td th:text="${customer['totalAccounts']}"></td>
 
+                    <td>
+                        <a th:href="@{/customer/{id}(id=${customer['customerId']})}" class="btn btn-sm btn-info">View</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
-
         <form th:action="@{/logout-process}" method="post" class="mt-3">
             <button type="submit" class="btn btn-danger">Logout</button>
         </form>
