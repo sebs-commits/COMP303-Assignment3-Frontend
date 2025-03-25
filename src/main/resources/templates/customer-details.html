@@ -12,7 +12,7 @@
         <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
         <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
 
-        <div th:if="${accounts != null and !accounts.isEmpty()}">
+        <div th:if="${accounts != null}">
             <div class="border border-primary-subtle">
                 <table class="table table-striped ">
                     <thead>
@@ -26,17 +26,17 @@
                     </thead>
                     <tbody>
                     <tr th:each="account : ${accounts}">
-                        <td th:text="${account.accountNumber}"></td>
-                        <td th:text="${account.accountType.accountTypeName}"></td>
+                        <td th:text="${account.get('accountNumber')}"></td>
+                        <td th:text="${account.get('accountType').get('accountTypeName')}"></td>
                         <td>
-                            <form th:id="'update' + ${account.accountNumber}" th:action="@{/customer/{id}/update-account(id=${customerId})}" method="post" class="align-items-center">
-                                <input type="hidden" name="accountNumber" th:value="${account.accountNumber}">
-                                <input type="number" class="form-control form-control-sm" name="balance" th:value="${account.balance}">
+                            <form th:id="'update' + ${account.get('accountNumber')}" th:action="@{/customer/{id}/update-account(id=${customerId})}" method="post" class="align-items-center">
+                                <input type="hidden" name="accountNumber" th:value="${account.get('accountNumber')}">
+                                <input type="number" class="form-control form-control-sm" name="balance" th:value="${account.get('balance')}">
                             </form>
                         </td>
-                        <td th:text="${account.overDraftLimit}"></td>
+                        <td th:text="${account.get('overDraftLimit')}"></td>
                         <td>
-                            <button type="submit" class="btn btn-primary btn-sm" th:form="'update' + ${account.accountNumber}">
+                            <button type="submit" class="btn btn-primary btn-sm" th:form="'update' + ${account.get('accountNumber')}">
                                 Update
                             </button>
                         </td>
@@ -47,10 +47,9 @@
         </div>
 
         <!-- Customer Details Table -->
-        <div class="card mt-4">
-            <div class="card-header">
-                <h4>Customer Information</h4>
-            </div>
+        <div class="border border-primary-subtle p-2 mt-3">
+
+            <h4>Customer Information</h4>
 
             <div class="card-body">
                 <div th:if="${customerUpdateSuccess}" class="alert alert-success" th:text="${customerUpdateSuccess}"></div>
@@ -69,18 +68,18 @@
                         <!-- Username -->
                         <tr>
                             <td>Username</td>
-                            <td th:text="${accounts[0].get('username')}"></td>
+                            <td th:text="${customer.get('username')}"></td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="username" th:placeholder="${accounts[0].get('username')}">
+                                <input type="text" class="form-control form-control-sm" name="username" th:placeholder="${customer.get('username')}">
                             </td>
                         </tr>
 
                         <!-- Customer Name -->
                         <tr>
                             <td>Name</td>
-                            <td th:text="${accounts[0].get('customerName')}"></td>
+                            <td th:text="${customer.get('customerName')}"></td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="customerName" th:placeholder="${accounts[0].get('customerName')}">
+                                <input type="text" class="form-control form-control-sm" name="customerName" th:placeholder="${customer.get('customerName')}">
                             </td>
                         </tr>
 
@@ -89,34 +88,33 @@
                             <td>Password</td>
                             <td>*******</td>
                             <td>
-                                <input type="password" class="form-control form-control-sm" name="password"
-                                       placeholder="********">
+                                <input type="password" class="form-control form-control-sm" name="password" placeholder="********">
                             </td>
                         </tr>
 
                         <tr>
                             <td>Address</td>
-                            <td th:text="${accounts[0].get('address')}"></td>
+                            <td th:text="${customer.get('address')}"></td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="address" th:placeholder="${accounts[0].get('address')}">
+                                <input type="text" class="form-control form-control-sm" name="address" th:placeholder="${customer.get('address')}">
                             </td>
                         </tr>
 
                         <!-- Postal Code -->
                         <tr>
                             <td>Postal Code</td>
-                            <td th:text="${accounts[0].get('postalCode')}"></td>
+                            <td th:text="${customer.get('postalCode')}"></td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="postalCode" th:placeholder="${accounts[0].get('postalCode')}">
+                                <input type="text" class="form-control form-control-sm" name="postalCode" th:placeholder="${customer.get('postalCode')}">
                             </td>
                         </tr>
 
                         <!-- City -->
                         <tr>
                             <td>City</td>
-                            <td th:text="${accounts[0].get('city')}"></td>
+                            <td th:text="${customer.get('city')}"></td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="city" th:placeholder="${accounts[0].get('city')}">
+                                <input type="text" class="form-control form-control-sm" name="city" th:placeholder="${customer.get('city')}">
                             </td>
                         </tr>
                         </tbody>

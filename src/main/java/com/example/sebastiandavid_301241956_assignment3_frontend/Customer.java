@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
-    private Long customerId;
+    private int customerId;
     private String customerName;
     private String username;
     private String password;
@@ -17,6 +17,7 @@ public class Customer {
     private LocalDate dob;
     private String address;
     private String phone;
-
+    private String postalCode;
+    private String city;
     private Boolean admin;
 }

@@ -47,25 +47,41 @@ public class ManagerController {
             return "dashboard";
         }
     }
-    @GetMapping("/customer/{id}")
-    public String getCustomerDetails(@PathVariable int id, Model model) {
-        try {
-            ResponseEntity<List<Map<String, Object>>> response = restTemplate.exchange(
-                    baseUrl + "/customers/" + id,
-                    HttpMethod.GET,
-                    null,
-                    new ParameterizedTypeReference<>() {}
-            );
 
-            model.addAttribute("accounts", response.getBody());
-            model.addAttribute("customerId", id);
-        } catch (Exception e) {
-            model.addAttribute("error", "Failed to load customer data");
-            model.addAttribute("accounts", new ArrayList<>());
-        }
+@GetMapping("/customer/{id}")
+public String getCustomerDetails(@PathVariable int id, Model model) {
+    try {
+        // Get the accounts for the customers
+        ResponseEntity<List<Map<String, Object>>> accountsResponse = restTemplate.exchange(
+                baseUrl + "/customers/" + id,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {}
+        );
+        List<Map<String, Object>> accounts = accountsResponse.getBody();
+        // Store the accounts in the model
+        model.addAttribute("accounts", accounts != null ? accounts : new ArrayList<>());
 
-        return "customer-details";
+        // Get the customer information
+        ResponseEntity<Map<String, Object>> customerResponse = restTemplate.exchange(
+                baseUrl + "/get-customers/" + id,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<Map<String, Object>>() {}
+        );
+        Map<String, Object> customer = customerResponse.getBody();
+        // Store the customer information in the model
+        model.addAttribute("customer", customer);
+
+        model.addAttribute("customerId", id);
+    } catch (Exception e) {
+        model.addAttribute("error", "Failed to load customer data: " + e.getMessage());
+        model.addAttribute("accounts", new ArrayList<>());
+        model.addAttribute("customer", new HashMap<>());
     }
+
+    return "customer-details";
+}
 
     @PostMapping("/customer/{customerId}/update-account")
     public String updateAccount(@PathVariable int customerId,
