@@ -69,60 +69,54 @@
                         <!-- Username -->
                         <tr>
                             <td>Username</td>
-                            <td th:text="not done"></td>
+                            <td th:text="${accounts[0].get('username')}"></td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="username"
-                                       th:placeholder="">
+                                <input type="text" class="form-control form-control-sm" name="username" th:placeholder="${accounts[0].get('username')}">
                             </td>
                         </tr>
 
                         <!-- Customer Name -->
                         <tr>
                             <td>Name</td>
-                            <td th:text="Not done"></td>
+                            <td th:text="${accounts[0].get('customerName')}"></td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="customerName"
-                                       th:placeholder="">
+                                <input type="text" class="form-control form-control-sm" name="customerName" th:placeholder="${accounts[0].get('customerName')}">
                             </td>
                         </tr>
 
                         <!-- Password -->
                         <tr>
                             <td>Password</td>
-                            <td>nothing for now</td>
+                            <td>*******</td>
                             <td>
                                 <input type="password" class="form-control form-control-sm" name="password"
-                                       placeholder="New password">
+                                       placeholder="********">
                             </td>
                         </tr>
 
-                        <!-- Address -->
                         <tr>
                             <td>Address</td>
-                            <td th:text="not done"></td>
+                            <td th:text="${accounts[0].get('address')}"></td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="address"
-                                       th:placeholder="${}">
+                                <input type="text" class="form-control form-control-sm" name="address" th:placeholder="${accounts[0].get('address')}">
                             </td>
                         </tr>
 
                         <!-- Postal Code -->
                         <tr>
                             <td>Postal Code</td>
-                            <td th:text="not done"></td>
+                            <td th:text="${accounts[0].get('postalCode')}"></td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="postalCode"
-                                       th:placeholder="">
+                                <input type="text" class="form-control form-control-sm" name="postalCode" th:placeholder="${accounts[0].get('postalCode')}">
                             </td>
                         </tr>
 
                         <!-- City -->
                         <tr>
                             <td>City</td>
-                            <td th:text="n/a"></td>
+                            <td th:text="${accounts[0].get('city')}"></td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="city"
-                                       th:placeholder="random city">
+                                <input type="text" class="form-control form-control-sm" name="city" th:placeholder="${accounts[0].get('city')}">
                             </td>
                         </tr>
                         </tbody>
