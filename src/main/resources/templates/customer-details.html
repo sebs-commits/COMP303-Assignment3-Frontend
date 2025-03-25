@@ -28,18 +28,23 @@
                     <tr th:each="account : ${accounts}">
                         <td th:text="${account.get('accountNumber')}"></td>
                         <td th:text="${account.get('accountType').get('accountTypeName')}"></td>
-                        <td>
-                            <form th:id="'update' + ${account.get('accountNumber')}" th:action="@{/customer/{id}/update-account(id=${customerId})}" method="post" class="align-items-center">
-                                <input type="hidden" name="accountNumber" th:value="${account.get('accountNumber')}">
+                        <form th:id="'update' + ${account.get('accountNumber')}"
+                              th:action="@{/customer/{id}/update-account(id=${customerId})}"
+                              method="post"
+                              class="align-items-center">
+                            <input type="hidden" name="accountNumber" th:value="${account.get('accountNumber')}">
+                            <td>
                                 <input type="number" class="form-control form-control-sm" name="balance" th:value="${account.get('balance')}">
-                            </form>
-                        </td>
-                        <td th:text="${account.get('overDraftLimit')}"></td>
-                        <td>
-                            <button type="submit" class="btn btn-primary btn-sm" th:form="'update' + ${account.get('accountNumber')}">
-                                Update
-                            </button>
-                        </td>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control form-control-sm" name="overDraftLimit" th:value="${account.get('overDraftLimit')}">
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    Update
+                                </button>
+                            </td>
+                        </form>
                     </tr>
                     </tbody>
                 </table>
@@ -122,6 +127,29 @@
 
                     <div class="text-end mt-3">
                         <button type="submit" class="btn btn-primary">Update Customer Details</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Add Account Section -->
+        <div class="border border-primary-subtle p-2 mt-3 mb-3">
+            <h4>Add New Account</h4>
+
+            <div class="card-body">
+
+                <form th:action="@{/customer/{id}/add-account(id=${customerId})}" method="post">
+                    <div class="mb-3 row">
+                        <label for="accountTypeId" class="col-sm-3 col-form-label">Account Type:</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" id="accountTypeId" name="accountTypeId" required>
+                                <option value="" selected disabled>Select Account Type</option>
+                                <option th:each="type : ${accountTypes}" th:value="${type.accountTypeId}" th:text="${type.accountTypeName}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-success">Create Account</button>
                     </div>
                 </form>
             </div>
